@@ -8,12 +8,29 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+# Load Packages
 ```{r load packages}
 library(nycflights13)
 library(tidyselect)
+library(dplyr)
 ```
+# Data Exploration
+### View Data
 ```{r explore the dataset}
 head(flights)
+```
+### Check Dimensions
+```{r check dimensions}
+dim(flights)
+```
+### Average Carrier Delays
+```{r summarise}
+group_by(flights, carrier) %>%
+  summarise(mean(arr_delay, na.rm = TRUE))
+```
+### Arrival Delays
+```{r}
+filter(flights, arr_delay > 120) %>%
+  arrange(desc(arr_delay))
 ```
 
