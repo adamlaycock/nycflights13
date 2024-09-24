@@ -1,0 +1,19 @@
+---
+title: "Data Exploration & Visualisation"
+author: "adamlaycock"
+date: "2024-09-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load packages}
+library(nycflights13)
+library(tidyselect)
+```
+```{r explore the dataset}
+head(flights)
+```
+
