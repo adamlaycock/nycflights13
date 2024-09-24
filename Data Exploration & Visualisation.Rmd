@@ -14,7 +14,8 @@ library(nycflights13)
 library(tidyselect)
 library(dplyr)
 ```
-# Data Exploration
+# Data Exploration & Manipulation
+## Exploring the Dataset
 ### View Data
 ```{r explore the dataset}
 head(flights)
@@ -23,14 +24,40 @@ head(flights)
 ```{r check dimensions}
 dim(flights)
 ```
+## Filtering Flights
 ### Average Carrier Delays
 ```{r summarise}
 group_by(flights, carrier) %>%
   summarise(mean(arr_delay, na.rm = TRUE))
 ```
 ### Arrival Delays
-```{r}
+```{r delay filtering}
 filter(flights, arr_delay > 120) %>%
   arrange(desc(arr_delay))
 ```
+### JFK Departure
+```{r origin filter}
+filter(flights, origin == 'JFK')
+```
+## Column Selection
+### Shrink the dataset
+```{r dataset shrink}
+sml_flights <- select(flights, year:day, ends_with('delay'), carrier, origin, dest)
+head(sml_flights)
+```
+## Create New Columns
+### Total delay creation
+```{r}
+mutate(sml_flights, total_delay = arr_delay + dep_delay) %>%
+head()
+```
+## Summarise Data
+```{r}
+group_by(flights, origin) %>%
+  summarise(mean(arr_delay, na.rm = TRUE))
+```
+
+
+
+
 
