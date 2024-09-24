@@ -71,8 +71,9 @@ is.na(flights) %>%
 ### Remove cancelled flights
 ```{r}
 not_cancelled <- filter(flights, !(is.na(arr_delay) | is.na(dep_delay)))
-head(not_cancelled)
+not_cancelled
 ```
+
 
 
 
