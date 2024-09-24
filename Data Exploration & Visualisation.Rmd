@@ -57,12 +57,22 @@ head()
 group_by(flights, origin) %>%
   summarise(mean(arr_delay, na.rm = TRUE))
 ```
-### Flights by carrier
+### Flights and delay by carrier
 ```{r}
 group_by(flights, carrier) %>%
   summarise(flights = sum(!is.na(arr_delay)), avg_delay = mean(dep_delay + arr_delay, na.rm = TRUE))
 ```
-
+## Handle Missing Data
+### Identify NA in columns
+```{r}
+is.na(flights) %>%
+  colSums()
+```
+### Remove cancelled flights
+```{r}
+not_cancelled <- filter(flights, !(is.na(arr_delay) | is.na(dep_delay)))
+head(not_cancelled)
+```
 
 
 
